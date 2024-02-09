@@ -5,17 +5,22 @@
 ---------------------------------------------------------------------------- */
 mapboxgl.accessToken = 'pk.eyJ1IjoibnlhbWF0byIsImEiOiJja2Y4dzNkOW8wY3MwMnFvM29iNnJzNzVzIn0.GHlHwu3r5YjKBU3qAKvccQ';
 const map = new mapboxgl.Map({
-    container: 'map',
-    style: "mapbox://styles/mapbox/satellite-v9",
-    zoom: 9,
-    center: [127.93383619628926, 26.504074468870304],
+    container: 'map', // container ID
+    // Choose from Mapbox's core styles, or make your own style with Mapbox Studio
+    style: 'mapbox://styles/mapbox/satellite-v9', // style URL
+    projection: 'globe', // Display the map as a globe, since satellite-v9 defaults to Mercator
+    center: [130.29512947990742, 38.821536580824926], // starting position [lng, lat]
+    zoom: 2 // starting zoom
 });
+map.on('style.load', () => {
+    map.setFog({}); // Set the default atmosphere style, since satellite-v9 doesn't include atmosphere by default.
+    });
 
-map.setMaxZoom(13);
+
+map.setMaxZoom(20);
 map.setMaxPitch(60)
 
 map.on('load', function () {
-
 
 
     // Fly to functionality
@@ -26,7 +31,11 @@ map.on('load', function () {
         const flyLocations = {
             "fly-world": { center: [130.29512947990742, 38.821536580824926], zoom: 2 },
             "fly-hawaii": { center: [-157.87604057447587, 20.36384710660511], zoom: 7 },
-            "fly-oahu": { center: [-157.9820394941992, 21.473956710447162], zoom: 10 }
+            "fly-bali": { center: [115.09857609640414, -8.28549595840383], zoom: 7 },
+            "fly-singapore": { center: [103.82364408627899, 1.2837839801814193], zoom: 9 },
+            "fly-maldives": { center: [73.23452224308963, 2.3930987986228622], zoom: 6 },
+            "fly-polynesia": { center: [-151.78907317129566, -16.554553406697714], zoom: 7 },
+            "fly-seychelles": { center: [55.505277049675044, -4.695062251279288], zoom: 7 },
         };
 
         if (flyLocations[target]) {
@@ -38,6 +47,39 @@ map.on('load', function () {
         }
     };
 
+
+    /* --------------------------------------------------------
+    　行政区域
+    -------------------------------------------------------- */
+    map.addSource('boundaries', {
+        'type': 'geojson',
+        'data': './geojson/boundaries/boundaries.geojson'
+    });
+    map.addLayer({
+        'id': "boundaries",
+        'type': 'fill',
+        'source': 'boundaries',
+        'layout': {
+            'visibility': 'none'
+        },
+        'paint': {
+            'fill-outline-color': 'rgba(0,0,0,1)',
+            'fill-color': 'rgba(255,255,255,.5)'
+        }
+    });
+    // ポップアップ //
+    map.on('click', "boundaries", function (e) {
+        new mapboxgl.Popup()
+            .setLngLat(e.lngLat)
+            .setHTML(e.features[0].properties["N03_004"])
+            .addTo(map);
+    });
+    map.on('mouseenter', "boundaries", function () {
+        map.getCanvas().style.cursor = 'pointer';
+    });
+    map.on('mouseleave', "boundaries", function () {
+        map.getCanvas().style.cursor = '';
+    });
 
     /* --------------------------------------------------------
     　ラグジュアリー・ホテル
@@ -151,7 +193,6 @@ map.on('load', function () {
         }
     );
 
-
     /* ----------------------------------------------------------------------------
     　レイヤー表示/非表示
     ---------------------------------------------------------------------------- */
@@ -167,6 +208,10 @@ map.on('load', function () {
     }
 
     // イベント・リスナー（チェックボックス）
+    // 行政区域 //
+    document.getElementById('boundariesCheckbox').addEventListener('change', function () {
+        updateLayerVisibility('boundaries', this.checked);
+    });
     // ラグジュアリー・ホテル（世界） //
     document.getElementById('luxury_hotelsCheckbox').addEventListener('change', function () {
         updateLayerVisibility('luxury_hotels', this.checked);
@@ -174,11 +219,13 @@ map.on('load', function () {
     
     
     // チェックボックスの状態に応じて表示/非表示
+    // 行政区域 //
+    updateLayerVisibility('boundaries', document.getElementById('boundariesCheckbox').checked);
     // ラグジュアリー・ホテル（世界） //
     updateLayerVisibility('luxury_hotels', document.getElementById('luxury_hotelsCheckbox').checked);
 
     // 初期設定
-    //document.getElementById('boundariesCheckbox').checked = true;
+    //document.getElementById('luxury_hotelsCheckbox').checked = true;
 
 
     //##### ローディング・スピナー #####//

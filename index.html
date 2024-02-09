@@ -50,7 +50,7 @@
 
         <!-- サイドバー: コントロールパネル -->
         <div class="container bg-dark text-white p-4 position-absolute offcanvas offcanvas-start show" data-bs-backdrop="false" id="off-canvas" style="margin-left:75px ;width: 350px; height:100vh; z-index:2; overflow-y: auto;">
-            <h1 class="display-6">Overseas</h1>
+            <h1 class="display-6">海外事例</h1>
 
             <div class="container">
                 <!-- ------------------------------------------------------------------
@@ -79,7 +79,11 @@
                                     <option value="">エリアを選択</option>
                                     <option value="fly-world">世界</option>
                                     <option value="fly-hawaii">ハワイ諸島</option>
-                                    <option value="fly-oahu">オアフ島</option>
+                                    <option value="fly-bali">バリ島</option>
+                                    <option value="fly-singapore">シンガポール</option>
+                                    <option value="fly-maldives">モルディブ</option>
+                                    <option value="fly-polynesia">ポリネシア</option>
+                                    <option value="fly-seychelles">セーシェル</option>
                                 </select>
                             </div>
                         </form>
@@ -87,6 +91,10 @@
 
                         <div class="row mb-3">
                             <div id="layerSwitcher">
+                                <div class="form-check" style="display: none;">
+                                    <input type="checkbox" id="boundariesCheckbox">
+                                    <label for="boundariesCheckbox">行政区域</label>
+                                </div>
                                 <div class="form-check">
                                     <input type="checkbox" id="luxury_hotelsCheckbox">
                                     <label for="luxury_hotelsCheckbox">ラグジュアリー・ホテル（世界）</label>
