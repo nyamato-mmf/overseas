@@ -36,6 +36,7 @@ map.on('load', function () {
             "fly-maldives": { center: [73.23452224308963, 2.3930987986228622], zoom: 6 },
             "fly-polynesia": { center: [-151.78907317129566, -16.554553406697714], zoom: 7 },
             "fly-seychelles": { center: [55.505277049675044, -4.695062251279288], zoom: 7 },
+            "fly-cuyo": { center: [120.92431245977218, 11.10817035342058], zoom: 7 },
         };
 
         if (flyLocations[target]) {
@@ -243,6 +244,41 @@ map.on('load', function () {
     });
 
 
+    /* --------------------------------------------------------
+    　MICE
+    -------------------------------------------------------- */
+    map.addSource('mice', {
+        'type': 'geojson',
+        'data': './geojson/facilities/mice/mice.geojson'
+    });
+    map.addLayer({
+        'id': "mice",
+        'type': 'circle',
+        'source': 'mice',
+        'layout': {
+            'visibility': 'none'
+        },
+        'paint': {
+            'circle-radius': 10,
+            'circle-stroke-width': 2,
+            'circle-color': 'rgba(0,0,0,0)',
+            'circle-stroke-color': 'red'
+        }
+    });
+    // ポップアップ //
+    map.on('click', "mice", function (e) {
+        new mapboxgl.Popup()
+            .setLngLat(e.lngLat)
+            .setHTML(e.features[0].properties["City"])
+            .addTo(map);
+    });
+    map.on('mouseenter', "mice", function () {
+        map.getCanvas().style.cursor = 'pointer';
+    });
+    map.on('mouseleave', "mice", function () {
+        map.getCanvas().style.cursor = '';
+    });
+
     /* ----------------------------------------------------------------------------
     　レイヤー表示/非表示
     ---------------------------------------------------------------------------- */
@@ -270,6 +306,10 @@ map.on('load', function () {
     document.getElementById('private_jetsCheckbox').addEventListener('change', function () {
         updateLayerVisibility('private_jets', this.checked);
     });  
+    // MICE //
+    document.getElementById('miceCheckbox').addEventListener('change', function () {
+        updateLayerVisibility('mice', this.checked);
+    });  
     
     
     // チェックボックスの状態に応じて表示/非表示
@@ -279,6 +319,8 @@ map.on('load', function () {
     updateLayerVisibility('luxury_hotels', document.getElementById('luxury_hotelsCheckbox').checked);
     // プライベート・ジェット //
     updateLayerVisibility('private_jets', document.getElementById('private_jetsCheckbox').checked);
+    // MICE //
+    updateLayerVisibility('mice', document.getElementById('miceCheckbox').checked);
 
     // 初期設定
     //document.getElementById('luxury_hotelsCheckbox').checked = true;
