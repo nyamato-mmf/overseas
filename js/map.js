@@ -193,6 +193,56 @@ map.on('load', function () {
         }
     );
 
+    /* --------------------------------------------------------
+    　プライベート・ジェット
+    -------------------------------------------------------- */
+    map.addSource('private_jets', {
+        'type': 'geojson',
+        'data': {
+            'type': 'FeatureCollection',
+            'features': [
+                {'type': 'Feature', 'properties': {'name': 'Sugar Beach, A Viceroy Resort ', 'description': '<strong>Sugar Beach, A Viceroy Resort </strong>'}, 'geometry': {'type': 'Point', 'coordinates': [-61.0612116, 13.8278433]}},
+                {'type': 'Feature', 'properties': {'name': 'Soneva Jani', 'description': '<strong>Soneva Jani</strong>'}, 'geometry': {'type': 'Point', 'coordinates': [73.4150317, 5.720434]}},
+                {'type': 'Feature', 'properties': {'name': 'Amanpulo', 'description': '<strong>Amanpulo</strong>'}, 'geometry': {'type': 'Point', 'coordinates': [120.7270957, 11.3563099]}},
+                {'type': 'Feature', 'properties': {'name': 'Cheval Blanc St-Barth', 'description': '<strong>Cheval Blanc St-Barth</strong>'}, 'geometry': {'type': 'Point', 'coordinates': [-62.85447689999999, 17.9190387]}},
+                {'type': 'Feature', 'properties': {'name': 'Steigenberger Grandhotel Belvedere', 'description': '<strong>Steigenberger Grandhotel Belvedere</strong>'}, 'geometry': {'type': 'Point', 'coordinates': [9.8268642, 46.80063550000001]}},
+                {'type': 'Feature', 'properties': {'name': 'AlpenGold Hotel Davos', 'description': '<strong>AlpenGold Hotel Davos</strong>'}, 'geometry': {'type': 'Point', 'coordinates': [9.8536434, 46.8133583]}},
+                {'type': 'Feature', 'properties': {'name': 'Kulm Hotel ', 'description': '<strong>Kulm Hotel </strong>'}, 'geometry': {'type': 'Point', 'coordinates': [9.8412717, 46.4990105]}},
+                {'type': 'Feature', 'properties': {'name': 'The Inn of The Five Graces', 'description': '<strong>The Inn of The Five Graces</strong>'}, 'geometry': {'type': 'Point', 'coordinates': [-105.9385253, 35.6836358]}},
+                {'type': 'Feature', 'properties': {'name': 'Twin Farms', 'description': '<strong>Twin Farms</strong>'}, 'geometry': {'type': 'Point', 'coordinates': [-72.5929, 43.7240354]}},
+                {'type': 'Feature', 'properties': {'name': 'The Resort at Paws Up', 'description': '<strong>The Resort at Paws Up</strong>'}, 'geometry': {'type': 'Point', 'coordinates': [-113.434776, 46.9169794]}},                
+            ]
+        }
+    });
+    map.addLayer({
+        'id': "private_jets",
+        'type': 'circle',
+        'source': 'private_jets',
+        'layout': {
+            'visibility': 'none'
+        },
+        'paint': {
+            'circle-radius': 5,
+            'circle-stroke-width': 2,
+            'circle-color': 'yellow',
+            'circle-stroke-color': 'red'
+        }
+    });
+    // ポップアップ //
+    map.on('click', "private_jets", function (e) {
+        new mapboxgl.Popup()
+            .setLngLat(e.lngLat)
+            .setHTML(e.features[0].properties["name"])
+            .addTo(map);
+    });
+    map.on('mouseenter', "private_jets", function () {
+        map.getCanvas().style.cursor = 'pointer';
+    });
+    map.on('mouseleave', "private_jets", function () {
+        map.getCanvas().style.cursor = '';
+    });
+
+
     /* ----------------------------------------------------------------------------
     　レイヤー表示/非表示
     ---------------------------------------------------------------------------- */
@@ -216,6 +266,10 @@ map.on('load', function () {
     document.getElementById('luxury_hotelsCheckbox').addEventListener('change', function () {
         updateLayerVisibility('luxury_hotels', this.checked);
     });  
+    // プライベート・ジェット //
+    document.getElementById('private_jetsCheckbox').addEventListener('change', function () {
+        updateLayerVisibility('private_jets', this.checked);
+    });  
     
     
     // チェックボックスの状態に応じて表示/非表示
@@ -223,6 +277,8 @@ map.on('load', function () {
     updateLayerVisibility('boundaries', document.getElementById('boundariesCheckbox').checked);
     // ラグジュアリー・ホテル（世界） //
     updateLayerVisibility('luxury_hotels', document.getElementById('luxury_hotelsCheckbox').checked);
+    // プライベート・ジェット //
+    updateLayerVisibility('private_jets', document.getElementById('private_jetsCheckbox').checked);
 
     // 初期設定
     //document.getElementById('luxury_hotelsCheckbox').checked = true;
