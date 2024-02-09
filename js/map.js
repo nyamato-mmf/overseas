@@ -222,10 +222,10 @@ map.on('load', function () {
             'visibility': 'none'
         },
         'paint': {
-            'circle-radius': 5,
+            'circle-radius': 7,
             'circle-stroke-width': 2,
-            'circle-color': 'yellow',
-            'circle-stroke-color': 'red'
+            'circle-color': '#ffff00',
+            'circle-stroke-color': '#0000ff'
         }
     });
     // ポップアップ //
