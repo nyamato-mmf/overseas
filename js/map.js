@@ -279,6 +279,43 @@ map.on('load', function () {
         map.getCanvas().style.cursor = '';
     });
 
+    /* --------------------------------------------------------
+    　クルーズ
+    -------------------------------------------------------- */
+    map.addSource('cruise_ships', {
+        'type': 'geojson',
+        'data': './geojson/cruise_ships/cruise_01.geojson'
+    });
+    
+   
+    // Add line layer
+    map.addLayer({
+        'id': 'cruise_ships',
+        'type': 'line',
+        'source': 'cruise_ships',
+        'paint': {
+            'line-color': 'blue',
+            'line-width': 2
+        },
+        'layout': {
+            'visibility': 'visible'
+        }
+    });
+    
+    // ポップアップ //
+    map.on('click', "cruise_ships", function (e) {
+        new mapboxgl.Popup()
+            .setLngLat(e.lngLat)
+            .setHTML(e.features[0].properties["City"])
+            .addTo(map);
+    });
+    map.on('mouseenter', "cruise_ships", function () {
+        map.getCanvas().style.cursor = 'pointer';
+    });
+    map.on('mouseleave', "cruise_ships", function () {
+        map.getCanvas().style.cursor = '';
+    });
+
     /* ----------------------------------------------------------------------------
     　レイヤー表示/非表示
     ---------------------------------------------------------------------------- */
