@@ -11,13 +11,6 @@
 { "type": "Feature", "properties": { "Port": "Icy Strait Point, Hoonah, Alaska", "lat": 58.1292446, "lon": -135.4628176 }, "geometry": { "type": "Point", "coordinates": [ -135.4628176, 58.1292446 ] } },
 { "type": "Feature", "properties": { "Port": "Glacier Bay, Alaska", "lat": 58.7, "lon": -136.15 }, "geometry": { "type": "Point", "coordinates": [ -136.15, 58.7 ] } },
 { "type": "Feature", "properties": { "Port": "Victoria BC, Vancouver Island Canada", "lat": 48.4284207, "lon": -123.3656444 }, "geometry": { "type": "Point", "coordinates": [ -123.3656444, 48.4284207 ] } },
-{ "type": "Feature", "properties": { "Port": "Vancouver, BC Canada", "lat": 49.2827291, "lon": -123.1207375 }, "geometry": { "type": "Point", "coordinates": [ -123.1207375, 49.2827291 ] } },
-{ "type": "Feature", "properties": { "Port": "Sitka, Baranof Island Alaska", "lat": 56.9973714, "lon": -135.0 }, "geometry": { "type": "Point", "coordinates": [ -135.0, 56.9973714 ] } },
-{ "type": "Feature", "properties": { "Port": "Skagway, Alaska", "lat": 59.457178, "lon": -135.3145346 }, "geometry": { "type": "Point", "coordinates": [ -135.3145346, 59.457178 ] } },
-{ "type": "Feature", "properties": { "Port": "Icy Strait Point, Hoonah, Alaska", "lat": 58.1292446, "lon": -135.4628176 }, "geometry": { "type": "Point", "coordinates": [ -135.4628176, 58.1292446 ] } },
-{ "type": "Feature", "properties": { "Port": "Glacier Bay, Alaska", "lat": 58.7, "lon": -136.15 }, "geometry": { "type": "Point", "coordinates": [ -136.15, 58.7 ] } },
-{ "type": "Feature", "properties": { "Port": "Ketchikan, Revillagigedo Island Alaska", "lat": 55.3422222, "lon": -131.6461111 }, "geometry": { "type": "Point", "coordinates": [ -131.646111100000013, 55.342222199999988 ] } },
-{ "type": "Feature", "properties": { "Port": "Victoria BC, Vancouver Island Canada", "lat": 48.4284207, "lon": -123.3656444 }, "geometry": { "type": "Point", "coordinates": [ -123.3656444, 48.4284207 ] } },
 { "type": "Feature", "properties": { "Port": "Vancouver, BC Canada", "lat": 49.2827291, "lon": -123.1207375 }, "geometry": { "type": "Point", "coordinates": [ -123.1207375, 49.2827291 ] } }
 ]
 }

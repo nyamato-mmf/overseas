@@ -50,39 +50,6 @@ map.on('load', function () {
 
 
     /* --------------------------------------------------------
-    　行政区域
-    -------------------------------------------------------- */
-    map.addSource('boundaries', {
-        'type': 'geojson',
-        'data': './geojson/boundaries/boundaries.geojson'
-    });
-    map.addLayer({
-        'id': "boundaries",
-        'type': 'fill',
-        'source': 'boundaries',
-        'layout': {
-            'visibility': 'none'
-        },
-        'paint': {
-            'fill-outline-color': 'rgba(0,0,0,1)',
-            'fill-color': 'rgba(255,255,255,.5)'
-        }
-    });
-    // ポップアップ //
-    map.on('click', "boundaries", function (e) {
-        new mapboxgl.Popup()
-            .setLngLat(e.lngLat)
-            .setHTML(e.features[0].properties["N03_004"])
-            .addTo(map);
-    });
-    map.on('mouseenter', "boundaries", function () {
-        map.getCanvas().style.cursor = 'pointer';
-    });
-    map.on('mouseleave', "boundaries", function () {
-        map.getCanvas().style.cursor = '';
-    });
-
-    /* --------------------------------------------------------
     　ラグジュアリー・ホテル
     -------------------------------------------------------- */
     map.loadImage(
@@ -282,39 +249,67 @@ map.on('load', function () {
     /* --------------------------------------------------------
     　クルーズ
     -------------------------------------------------------- */
-    map.addSource('cruise_ships', {
-        'type': 'geojson',
-        'data': './geojson/cruise_ships/cruise_01.geojson'
-    });
-    
-   
-    // Add line layer
-    map.addLayer({
-        'id': 'cruise_ships',
-        'type': 'line',
-        'source': 'cruise_ships',
-        'paint': {
-            'line-color': 'blue',
-            'line-width': 2
-        },
-        'layout': {
-            'visibility': 'visible'
-        }
-    });
-    
-    // ポップアップ //
-    map.on('click', "cruise_ships", function (e) {
-        new mapboxgl.Popup()
-            .setLngLat(e.lngLat)
-            .setHTML(e.features[0].properties["City"])
-            .addTo(map);
-    });
-    map.on('mouseenter', "cruise_ships", function () {
-        map.getCanvas().style.cursor = 'pointer';
-    });
-    map.on('mouseleave', "cruise_ships", function () {
-        map.getCanvas().style.cursor = '';
-    });
+    function add_cruise_ships_LayerAndEvents(sourceId, layerId, circleColor) {
+        map.addSource(sourceId, {
+            'type': 'geojson',
+            'data': `./geojson/cruise_ships/${sourceId}.geojson`
+        });
+        map.addLayer({
+            'id': layerId,
+            'type': 'circle',
+            'source': sourceId,
+            'layout': {
+                'visibility': 'none'
+            },
+            'paint': {
+                'circle-color': circleColor,
+                'circle-radius': 5,
+                'circle-stroke-width': 2,
+                'circle-stroke-color': 'rgba(0, 0, 0, 0)'
+            }
+        });
+        map.on('click', layerId, function (e) {
+            new mapboxgl.Popup()
+                .setLngLat(e.lngLat)
+                .setHTML(e.features[0].properties["Port"])
+                .addTo(map);
+        });
+        map.on('mouseenter', layerId, function () {
+            map.getCanvas().style.cursor = 'pointer';
+        });
+        map.on('mouseleave', layerId, function () {
+            map.getCanvas().style.cursor = '';
+        });
+    }
+
+    // Define cruise layers and colors
+    const cruiseLayers = [
+        { sourceId: 'cruise_01', layerId: 'cruise_01', color: '#FF5733' },
+        { sourceId: 'cruise_02', layerId: 'cruise_02', color: '#FFBD33' },
+        { sourceId: 'cruise_03', layerId: 'cruise_03', color: '#FF3333' },
+        { sourceId: 'cruise_04', layerId: 'cruise_04', color: '#33FF57' },
+        { sourceId: 'cruise_05', layerId: 'cruise_05', color: '#33FFBD' },
+        { sourceId: 'cruise_06', layerId: 'cruise_06', color: '#33BDFF' },
+        { sourceId: 'cruise_07', layerId: 'cruise_07', color: '#5733FF' },
+        { sourceId: 'cruise_08', layerId: 'cruise_08', color: '#BD33FF' },
+        { sourceId: 'cruise_09', layerId: 'cruise_09', color: '#FF33BD' },
+        { sourceId: 'cruise_10', layerId: 'cruise_10', color: '#FF33BD' },
+        { sourceId: 'cruise_11', layerId: 'cruise_11', color: '#FF5733' },
+        { sourceId: 'cruise_12', layerId: 'cruise_12', color: '#FFBD33' },
+        { sourceId: 'cruise_13', layerId: 'cruise_13', color: '#FF3333' },
+        { sourceId: 'cruise_14', layerId: 'cruise_14', color: '#33FF57' },
+        { sourceId: 'cruise_15', layerId: 'cruise_15', color: '#33FFBD' },
+        { sourceId: 'cruise_16', layerId: 'cruise_16', color: '#33BDFF' },
+        { sourceId: 'cruise_17', layerId: 'cruise_17', color: '#5733FF' },
+        { sourceId: 'cruise_18', layerId: 'cruise_18', color: '#BD33FF' },
+        { sourceId: 'cruise_19', layerId: 'cruise_19', color: '#FF33BD' },
+        { sourceId: 'cruise_20', layerId: 'cruise_20', color: '#FF33BD' },
+        { sourceId: 'cruise_21', layerId: 'cruise_21', color: '#FF5733' },
+        { sourceId: 'cruise_22', layerId: 'cruise_22', color: '#FFBD33' },
+    ];
+
+    // Add cruise layers and events
+    cruiseLayers.forEach(layer => add_cruise_ships_LayerAndEvents(layer.sourceId, layer.layerId, layer.color));
 
     /* ----------------------------------------------------------------------------
     　レイヤー表示/非表示
@@ -331,10 +326,6 @@ map.on('load', function () {
     }
 
     // イベント・リスナー（チェックボックス）
-    // 行政区域 //
-    document.getElementById('boundariesCheckbox').addEventListener('change', function () {
-        updateLayerVisibility('boundaries', this.checked);
-    });
     // ラグジュアリー・ホテル（世界） //
     document.getElementById('luxury_hotelsCheckbox').addEventListener('change', function () {
         updateLayerVisibility('luxury_hotels', this.checked);
@@ -347,17 +338,22 @@ map.on('load', function () {
     document.getElementById('miceCheckbox').addEventListener('change', function () {
         updateLayerVisibility('mice', this.checked);
     });  
+    // クルーズ //
+    document.getElementById('cruise_shipsCheckbox').addEventListener('change', function () {
+        updateLayerVisibility(['cruise_01','cruise_02','cruise_03','cruise_04','cruise_05','cruise_06','cruise_07','cruise_08','cruise_09','cruise_10','cruise_11','cruise_12','cruise_13','cruise_14','cruise_15','cruise_16','cruise_17','cruise_18','cruise_19','cruise_20','cruise_21','cruise_22',], this.checked);
+    });  
     
     
     // チェックボックスの状態に応じて表示/非表示
     // 行政区域 //
-    updateLayerVisibility('boundaries', document.getElementById('boundariesCheckbox').checked);
     // ラグジュアリー・ホテル（世界） //
     updateLayerVisibility('luxury_hotels', document.getElementById('luxury_hotelsCheckbox').checked);
     // プライベート・ジェット //
     updateLayerVisibility('private_jets', document.getElementById('private_jetsCheckbox').checked);
     // MICE //
     updateLayerVisibility('mice', document.getElementById('miceCheckbox').checked);
+    // クルーズ //
+    updateLayerVisibility(['cruise_01','cruise_02','cruise_03','cruise_04','cruise_05','cruise_06','cruise_07','cruise_08','cruise_09','cruise_10','cruise_11','cruise_12','cruise_13','cruise_14','cruise_15','cruise_16','cruise_17','cruise_18','cruise_19','cruise_20','cruise_21','cruise_22',], document.getElementById('cruise_shipsCheckbox').checked);
 
     // 初期設定
     //document.getElementById('luxury_hotelsCheckbox').checked = true;
