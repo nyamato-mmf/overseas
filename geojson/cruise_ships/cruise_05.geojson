@@ -1,16 +1,1 @@
-{
-"type": "FeatureCollection",
-"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
-"features": [
-{ "type": "Feature", "properties": { "Port": "Tokyo, Japan", "lat": 35.6764225, "lon": 139.650027 }, "geometry": { "type": "Point", "coordinates": [ 139.650027, 35.6764225 ] } },
-{ "type": "Feature", "properties": { "Port": "Aomori City, Japan Aomori", "lat": 40.8222197, "lon": 140.7473524 }, "geometry": { "type": "Point", "coordinates": [ 140.747352400000011, 40.8222197 ] } },
-{ "type": "Feature", "properties": { "Port": "Sapporo-Otaru, Japan Shiribeshi", "lat": 43.1902372, "lon": 140.994172 }, "geometry": { "type": "Point", "coordinates": [ 140.994172, 43.1902372 ] } },
-{ "type": "Feature", "properties": { "Port": "Kodiak Island, Alaska", "lat": 57.4912463, "lon": -153.495022 }, "geometry": { "type": "Point", "coordinates": [ -153.495022, 57.4912463 ] } },
-{ "type": "Feature", "properties": { "Port": "Seward, Alaska", "lat": 60.1047739, "lon": -149.4421037 }, "geometry": { "type": "Point", "coordinates": [ -149.4421037, 60.1047739 ] } },
-{ "type": "Feature", "properties": { "Port": "Hubbard Glacier, Alaska", "lat": 60.313889, "lon": -139.370833 }, "geometry": { "type": "Point", "coordinates": [ -139.370833, 60.313889 ] } },
-{ "type": "Feature", "properties": { "Port": "Icy Strait Point, Hoonah, Alaska", "lat": 58.1292446, "lon": -135.4628176 }, "geometry": { "type": "Point", "coordinates": [ -135.4628176, 58.1292446 ] } },
-{ "type": "Feature", "properties": { "Port": "Glacier Bay, Alaska", "lat": 58.7, "lon": -136.15 }, "geometry": { "type": "Point", "coordinates": [ -136.15, 58.7 ] } },
-{ "type": "Feature", "properties": { "Port": "Victoria BC, Vancouver Island Canada", "lat": 48.4284207, "lon": -123.3656444 }, "geometry": { "type": "Point", "coordinates": [ -123.3656444, 48.4284207 ] } },
-{ "type": "Feature", "properties": { "Port": "Vancouver, BC Canada", "lat": 49.2827291, "lon": -123.1207375 }, "geometry": { "type": "Point", "coordinates": [ -123.1207375, 49.2827291 ] } }
-]
-}
+{"type":"FeatureCollection","features":[{"type":"Feature","properties":{"Port":["Tokyo, Japan","Aomori City, Japan Aomori","Sapporo-Otaru, Japan Shiribeshi","Kodiak Island, Alaska","Seward, Alaska","Hubbard Glacier, Alaska","Icy Strait Point, Hoonah, Alaska","Glacier Bay, Alaska","Victoria BC, Vancouver Island Canada","Vancouver, BC Canada"],"lat":57.49124629999999,"lon":206.504978},"geometry":{"type":"LineString","coordinates":[[139.65002700000002,35.6764225],[140.7473524,40.8222197],[140.994172,43.1902372],[206.504978,57.49124629999999],[210.55789630000004,60.1047739],[220.629167,60.313889],[224.5371824,58.1292446],[223.85000000000002,58.7],[236.6343556,48.4284207],[236.87926249999998,49.2827291]]},"bbox":[139.65002700000002,35.6764225,236.87926249999998,60.313889]}]}
