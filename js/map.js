@@ -249,67 +249,68 @@ map.on('load', function () {
     /* --------------------------------------------------------
     　クルーズ
     -------------------------------------------------------- */
-    function add_cruise_ships_LayerAndEvents(sourceId, layerId, circleColor) {
+    function add_cruise_ships_LayerAndEvents(sourceId, linelayerId, circlelayerId, circleColor) {
         map.addSource(sourceId, {
             'type': 'geojson',
             'data': `./geojson/cruise_ships/${sourceId}.geojson`
         });
         map.addLayer({
-            'id': layerId,
+            'id': linelayerId,
+            'type': 'line',
+            'source': sourceId,
+            'layout': {
+                'visibility': 'visible'
+            },
+            'paint': {
+                'line-color': circleColor,
+                'line-width': 2,
+            }
+        });
+        map.addLayer({
+            'id': circlelayerId,
             'type': 'circle',
             'source': sourceId,
             'layout': {
-                'visibility': 'none'
+                'visibility': 'visible'
             },
             'paint': {
-                'circle-color': circleColor,
                 'circle-radius': 5,
                 'circle-stroke-width': 2,
-                'circle-stroke-color': 'rgba(0, 0, 0, 0)'
+                'circle-color': 'rgba(0, 0, 0, 0)',
+                'circle-stroke-color': circleColor
             }
-        });
-        map.on('click', layerId, function (e) {
-            new mapboxgl.Popup()
-                .setLngLat(e.lngLat)
-                .setHTML(e.features[0].properties["Port"])
-                .addTo(map);
-        });
-        map.on('mouseenter', layerId, function () {
-            map.getCanvas().style.cursor = 'pointer';
-        });
-        map.on('mouseleave', layerId, function () {
-            map.getCanvas().style.cursor = '';
         });
     }
 
     // Define cruise layers and colors
     const cruiseLayers = [
-        { sourceId: 'cruise_01', layerId: 'cruise_01', color: '#FF5733' },
-        { sourceId: 'cruise_02', layerId: 'cruise_02', color: '#FFBD33' },
-        { sourceId: 'cruise_03', layerId: 'cruise_03', color: '#FF3333' },
-        { sourceId: 'cruise_04', layerId: 'cruise_04', color: '#33FF57' },
-        { sourceId: 'cruise_05', layerId: 'cruise_05', color: '#33FFBD' },
-        { sourceId: 'cruise_06', layerId: 'cruise_06', color: '#33BDFF' },
-        { sourceId: 'cruise_07', layerId: 'cruise_07', color: '#5733FF' },
-        { sourceId: 'cruise_08', layerId: 'cruise_08', color: '#BD33FF' },
-        { sourceId: 'cruise_09', layerId: 'cruise_09', color: '#FF33BD' },
-        { sourceId: 'cruise_10', layerId: 'cruise_10', color: '#FF33BD' },
-        { sourceId: 'cruise_11', layerId: 'cruise_11', color: '#FF5733' },
-        { sourceId: 'cruise_12', layerId: 'cruise_12', color: '#FFBD33' },
-        { sourceId: 'cruise_13', layerId: 'cruise_13', color: '#FF3333' },
-        { sourceId: 'cruise_14', layerId: 'cruise_14', color: '#33FF57' },
-        { sourceId: 'cruise_15', layerId: 'cruise_15', color: '#33FFBD' },
-        { sourceId: 'cruise_16', layerId: 'cruise_16', color: '#33BDFF' },
-        { sourceId: 'cruise_17', layerId: 'cruise_17', color: '#5733FF' },
-        { sourceId: 'cruise_18', layerId: 'cruise_18', color: '#BD33FF' },
-        { sourceId: 'cruise_19', layerId: 'cruise_19', color: '#FF33BD' },
-        { sourceId: 'cruise_20', layerId: 'cruise_20', color: '#FF33BD' },
-        { sourceId: 'cruise_21', layerId: 'cruise_21', color: '#FF5733' },
-        { sourceId: 'cruise_22', layerId: 'cruise_22', color: '#FFBD33' },
+        { sourceId: 'cruise_01', linelayerId: 'cruise_01-line', circlelayerId: 'cruise_01-circle', color: '#FF5733' },
+        { sourceId: 'cruise_02', linelayerId: 'cruise_02-line', circlelayerId: 'cruise_02-circle', color: '#FFBD33' },
+        { sourceId: 'cruise_03', linelayerId: 'cruise_03-line', circlelayerId: 'cruise_03-circle', color: '#FF3333' },
+        { sourceId: 'cruise_04', linelayerId: 'cruise_04-line', circlelayerId: 'cruise_04-circle', color: '#33FF57' },
+        { sourceId: 'cruise_05', linelayerId: 'cruise_05-line', circlelayerId: 'cruise_05-circle', color: '#33FFBD' },
+        { sourceId: 'cruise_06', linelayerId: 'cruise_06-line', circlelayerId: 'cruise_06-circle', color: '#33BDFF' },
+        { sourceId: 'cruise_07', linelayerId: 'cruise_07-line', circlelayerId: 'cruise_07-circle', color: '#5733FF' },
+        { sourceId: 'cruise_08', linelayerId: 'cruise_08-line', circlelayerId: 'cruise_08-circle', color: '#BD33FF' },
+        { sourceId: 'cruise_09', linelayerId: 'cruise_09-line', circlelayerId: 'cruise_09-circle', color: '#FF33BD' },
+        { sourceId: 'cruise_10', linelayerId: 'cruise_10-line', circlelayerId: 'cruise_10-circle', color: '#FF33BD' },
+        { sourceId: 'cruise_11', linelayerId: 'cruise_11-line', circlelayerId: 'cruise_11-circle', color: '#FF5733' },
+        { sourceId: 'cruise_12', linelayerId: 'cruise_12-line', circlelayerId: 'cruise_12-circle', color: '#FFBD33' },
+        { sourceId: 'cruise_13', linelayerId: 'cruise_13-line', circlelayerId: 'cruise_13-circle', color: '#FF3333' },
+        { sourceId: 'cruise_14', linelayerId: 'cruise_14-line', circlelayerId: 'cruise_14-circle', color: '#33FF57' },
+        { sourceId: 'cruise_15', linelayerId: 'cruise_15-line', circlelayerId: 'cruise_15-circle', color: '#33FFBD' },
+        { sourceId: 'cruise_16', linelayerId: 'cruise_16-line', circlelayerId: 'cruise_16-circle', color: '#33BDFF' },
+        { sourceId: 'cruise_17', linelayerId: 'cruise_17-line', circlelayerId: 'cruise_17-circle', color: '#5733FF' },
+        { sourceId: 'cruise_18', linelayerId: 'cruise_18-line', circlelayerId: 'cruise_18-circle', color: '#BD33FF' },
+        { sourceId: 'cruise_19', linelayerId: 'cruise_19-line', circlelayerId: 'cruise_19-circle', color: '#FF33BD' },
+        { sourceId: 'cruise_20', linelayerId: 'cruise_20-line', circlelayerId: 'cruise_20-circle', color: '#FF33BD' },
+        { sourceId: 'cruise_21', linelayerId: 'cruise_21-line', circlelayerId: 'cruise_21-circle', color: '#FF5733' },
+        { sourceId: 'cruise_22', linelayerId: 'cruise_22-line', circlelayerId: 'cruise_22-circle', color: '#FFBD33' },
+        { sourceId: 'cruise_23', linelayerId: 'cruise_23-line', circlelayerId: 'cruise_23-circle', color: '#FF3333' },
     ];
 
     // Add cruise layers and events
-    cruiseLayers.forEach(layer => add_cruise_ships_LayerAndEvents(layer.sourceId, layer.layerId, layer.color));
+    cruiseLayers.forEach(layer => add_cruise_ships_LayerAndEvents(layer.sourceId, layer.linelayerId, layer.circlelayerId, layer.color));
 
     /* ----------------------------------------------------------------------------
     　レイヤー表示/非表示
@@ -340,7 +341,11 @@ map.on('load', function () {
     });  
     // クルーズ //
     document.getElementById('cruise_shipsCheckbox').addEventListener('change', function () {
-        updateLayerVisibility(['cruise_01','cruise_02','cruise_03','cruise_04','cruise_05','cruise_06','cruise_07','cruise_08','cruise_09','cruise_10','cruise_11','cruise_12','cruise_13','cruise_14','cruise_15','cruise_16','cruise_17','cruise_18','cruise_19','cruise_20','cruise_21','cruise_22',], this.checked);
+        updateLayerVisibility(['cruise_01-line','cruise_02-line','cruise_03-line','cruise_04-line','cruise_05-line','cruise_06-line','cruise_07-line','cruise_08-line','cruise_09-line','cruise_10-line','cruise_11-line','cruise_12-line','cruise_13-line','cruise_14-line','cruise_15-line','cruise_16-line','cruise_17-line','cruise_18-line','cruise_19-line','cruise_20-line','cruise_21-line','cruise_22-line','cruise_23-line'], this.checked);
+    });  
+    // クルーズ //
+    document.getElementById('cruise_shipsCheckbox').addEventListener('change', function () {
+        updateLayerVisibility(['cruise_01-circle','cruise_02-circle','cruise_03-circle','cruise_04-circle','cruise_05-circle','cruise_06-circle','cruise_07-circle','cruise_08-circle','cruise_09-circle','cruise_10-circle','cruise_11-circle','cruise_12-circle','cruise_13-circle','cruise_14-circle','cruise_15-circle','cruise_16-circle','cruise_17-circle','cruise_18-circle','cruise_19-circle','cruise_20-circle','cruise_21-circle','cruise_22-circle','cruise_23-circle'], this.checked);
     });  
     
     
@@ -353,7 +358,9 @@ map.on('load', function () {
     // MICE //
     updateLayerVisibility('mice', document.getElementById('miceCheckbox').checked);
     // クルーズ //
-    updateLayerVisibility(['cruise_01','cruise_02','cruise_03','cruise_04','cruise_05','cruise_06','cruise_07','cruise_08','cruise_09','cruise_10','cruise_11','cruise_12','cruise_13','cruise_14','cruise_15','cruise_16','cruise_17','cruise_18','cruise_19','cruise_20','cruise_21','cruise_22',], document.getElementById('cruise_shipsCheckbox').checked);
+    updateLayerVisibility(['cruise_01-line','cruise_02-line','cruise_03-line','cruise_04-line','cruise_05-line','cruise_06-line','cruise_07-line','cruise_08-line','cruise_09-line','cruise_10-line','cruise_11-line','cruise_12-line','cruise_13-line','cruise_14-line','cruise_15-line','cruise_16-line','cruise_17-line','cruise_18-line','cruise_19-line','cruise_20-line','cruise_21-line','cruise_22-line','cruise_23-line'], document.getElementById('cruise_shipsCheckbox').checked);
+    // クルーズ //
+    updateLayerVisibility(['cruise_01-circle','cruise_02-circle','cruise_03-circle','cruise_04-circle','cruise_05-circle','cruise_06-circle','cruise_07-circle','cruise_08-circle','cruise_09-circle','cruise_10-circle','cruise_11-circle','cruise_12-circle','cruise_13-circle','cruise_14-circle','cruise_15-circle','cruise_16-circle','cruise_17-circle','cruise_18-circle','cruise_19-circle','cruise_20-circle','cruise_21-circle','cruise_22-circle','cruise_23-circle'], document.getElementById('cruise_shipsCheckbox').checked);
 
     // 初期設定
     //document.getElementById('luxury_hotelsCheckbox').checked = true;
