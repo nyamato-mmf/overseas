@@ -39,6 +39,13 @@
         <div id="canvas-container">
             <canvas id="myChart"></canvas>
         </div>
+            
+        <!-- ------------------------------------------------------------------
+            positioning キャンバス
+        ------------------------------------------------------------------- -->
+        <div id="positioning-container">
+            <img id="myPositioning" src="./img/positioning/positioning.png">
+        </div>
 
         <!-- サイドバー: icons -->
         <div class="container bg-light position-fixed px-4" style="width: 75px; height:100vh; z-index:3">
@@ -101,6 +108,9 @@
                     <li class="nav-item">
                         <a class="nav-link border border-white" id="graph-tab" data-toggle="tab" href="#mygraph">グラフ</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link border border-white" id="positioning-tab" data-toggle="tab" href="#mypositioning">ポジション</a>
+                    </li>
                 </ul>
                 <!-- End of タブ -->
 
@@ -140,7 +150,7 @@
                                 </div>
                                 <div class="form-check">
                                     <input type="checkbox" id="private_jetsCheckbox">
-                                    <label for="private_jetsCheckbox">プライベート・ジェット (Top Destinations)</label>
+                                    <label for="private_jetsCheckbox">プライベート・ジェット (リゾート目的地)</label>
                                 </div>
                                 <div class="form-check">
                                     <input type="checkbox" id="miceCheckbox">
@@ -176,6 +186,12 @@
                         </form>
                     </div>
                     <!-- End of グラフタブ・コンテンツ -->
+
+                    <!-- ------------------------------------------------------------------
+                        SVG・コンテンツ
+                    ------------------------------------------------------------------- -->
+                    <div class="tab-pane fade" id="mypositioning"></div>
+                    <!-- End of SVG・コンテンツ -->
 
                 </div>
             </div>

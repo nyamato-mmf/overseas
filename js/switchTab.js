@@ -10,10 +10,20 @@ document.addEventListener('DOMContentLoaded', function() {
             if (event.target.getAttribute('href') === '#mygraph') {
                 document.getElementById('map').style.display = 'none';
                 document.getElementById('canvas-container').style.display = 'block';
-            } else {
+                document.getElementById('positioning-container').style.display = 'none';
+            } else if (event.target.getAttribute('href') === '#map') {
                 // Show the map and hide the chart for other tabs
                 document.getElementById('map').style.display = 'block';
                 document.getElementById('canvas-container').style.display = 'none';
+                document.getElementById('positioning-container').style.display = 'none';
+            } else if (event.target.getAttribute('href') === '#mypositioning') {
+                document.getElementById('map').style.display = 'none';
+                document.getElementById('canvas-container').style.display = 'none';
+                document.getElementById('positioning-container').style.display = 'block';
+            } else {
+                document.getElementById('map').style.display = 'block';
+                document.getElementById('canvas-container').style.display = 'none';
+                document.getElementById('positioning-container').style.display = 'none';
             }
         });
     });
