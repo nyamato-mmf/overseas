@@ -49,8 +49,8 @@ body { margin: 0; padding: 0; }
     justify-content: center; /* Horizontally center the content */
     align-items: center; /* Vertically center the content */
     position: absolute;
-    top: 60%; /* Position the container at the vertical center of the window */
-    left: 60%; /* Position the container at the horizontal center of the window */
+    top: 55%; /* Position the container at the vertical center of the window */
+    left: 55%; /* Position the container at the horizontal center of the window */
     transform: translate(-50%, -50%); /* Move the container back by half of its own width and height */
     width: 80%; /* Set the width of the container */
     max-width: 1000px; /* Set a maximum width for the container */
@@ -60,7 +60,7 @@ body { margin: 0; padding: 0; }
 #myPositioning { 
     /* Adjust the width and height of the image */
     max-width: 100%; /* Set the maximum width of the image to fit the container */
-    max-height: 100%; /* Set the maximum height of the image to fit the container */
+    max-height: 90%; /* Set the maximum height of the image to fit the container */
     width: auto; /* Ensure the image width adjusts to maintain aspect ratio */
     height: auto; /* Ensure the image height adjusts to maintain aspect ratio */
 }
