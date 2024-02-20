@@ -259,7 +259,7 @@ map.on('load', function () {
             'type': 'line',
             'source': sourceId,
             'layout': {
-                'visibility': 'visible'
+                'visibility': 'none'
             },
             'paint': {
                 'line-color': circleColor,
@@ -271,7 +271,7 @@ map.on('load', function () {
             'type': 'circle',
             'source': sourceId,
             'layout': {
-                'visibility': 'visible'
+                'visibility': 'none'
             },
             'paint': {
                 'circle-radius': 5,
