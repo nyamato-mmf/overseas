@@ -247,6 +247,17 @@ map.on('load', function () {
     });
 
     /* --------------------------------------------------------
+    　沖縄マーカー
+    -------------------------------------------------------- */
+    // Set marker options.
+    const okinawa_marker = new mapboxgl.Marker({
+        color: "#FFFF00",
+        scale: 0.5,
+        draggable: false
+    }).setLngLat([127.68024536707256, 26.208922988503556])
+        .addTo(map);
+
+    /* --------------------------------------------------------
     　クルーズ
     -------------------------------------------------------- */
     function add_cruise_ships_LayerAndEvents(sourceId, linelayerId, circlelayerId, circleColor) {
