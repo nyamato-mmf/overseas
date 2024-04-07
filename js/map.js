@@ -22,6 +22,15 @@ map.setMaxPitch(60)
 
 map.on('load', function () {
 
+    // Add terrain source, with slight exaggeration
+    map.addSource('mapbox-dem', {
+        'type': 'raster-dem',
+        'url': 'mapbox://mapbox.terrain-rgb',
+        'tileSize': 512,
+        'maxzoom': 14
+    });
+    map.setTerrain({ 'source': 'mapbox-dem', 'exaggeration': 1.0 });
+
 
     // Fly to functionality
     document.getElementById("fly").select.onchange = function() {
